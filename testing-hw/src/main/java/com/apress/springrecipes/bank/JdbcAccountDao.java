@@ -5,9 +5,9 @@ import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
 public class JdbcAccountDao extends SimpleJdbcDaoSupport implements AccountDao {
 
     public void createAccount(Account account) {
-        String sql = "INSERT INTO ACCOUNT (ACCOUNT_NO, BALANCE) VALUES (?, ?)";
+        String sql = "INSERT INTO ACCOUNT (ACCOUNT_NO, BALANCE, ACCOUNT_TYPE) VALUES (?, ?, ?)";
         getSimpleJdbcTemplate().update(
-                sql, account.getAccountNo(), account.getBalance());
+                sql, account.getAccountNo(), account.getBalance(), account.getAccountType());
     }
 
     public void updateAccount(Account account) {

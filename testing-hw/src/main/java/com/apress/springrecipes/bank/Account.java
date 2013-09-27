@@ -1,9 +1,26 @@
 package com.apress.springrecipes.bank;
 
+import org.hibernate.type.SetType;
+
 public class Account {
+	
+	protected enum AccountType {
+		CHECKING("Checking"), SAVINGS("Savings"), BROKERAGE("Brokerage");
+		
+		private String type;
+		
+		private AccountType(String type) {
+			this.type = type;
+		}
+		
+		public String getTypeString() {
+			return type;
+		}
+	}
 
     private String accountNo;
     private double balance;
+    private String accountType;
 
     public Account() {}
 
@@ -26,6 +43,14 @@ public class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+    
+    public String getAccountType() {
+        return accountType;
+    }
+    
+    public void setAccountType(String accountType) {
+    	this.accountType = accountType;
     }
 
     public boolean equals(Object obj) {

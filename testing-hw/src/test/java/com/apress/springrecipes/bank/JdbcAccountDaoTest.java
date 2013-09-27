@@ -10,6 +10,8 @@ import org.springframework.test.annotation.Timed;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
+import com.apress.springrecipes.bank.Account.AccountType;
+
 @ContextConfiguration(locations = "/beans.xml")
 public class JdbcAccountDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	
@@ -28,6 +30,7 @@ public class JdbcAccountDaoTest extends AbstractTransactionalJUnit4SpringContext
 		 	Account account = new Account();
 		 	account.setAccountNo("1234");
 		 	account.setBalance(1000);
+		 	account.setAccountType(AccountType.SAVINGS.getTypeString());
 	        accountDao.createAccount(account);
 	        
 	        Account accountFromDB = accountDao.findAccount("1234");

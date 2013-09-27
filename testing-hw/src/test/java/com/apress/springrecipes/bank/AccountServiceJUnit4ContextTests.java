@@ -10,11 +10,14 @@ import org.springframework.test.annotation.Timed;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
+import com.apress.springrecipes.bank.Account.AccountType;
+
 @ContextConfiguration(locations = "classpath:beans.xml")
 public class AccountServiceJUnit4ContextTests extends
         AbstractTransactionalJUnit4SpringContextTests {
 
     private static final String TEST_ACCOUNT_NO = "1234";
+    private static final AccountType TEST_ACCOUNT_TYPE = AccountType.SAVINGS;
 
     @Autowired
     private AccountService accountService;
@@ -23,8 +26,8 @@ public class AccountServiceJUnit4ContextTests extends
     public void init() {
 	executeSqlScript("classpath:/bank.sql",true);
         simpleJdbcTemplate.update(
-                "INSERT INTO ACCOUNT (ACCOUNT_NO, BALANCE) VALUES (?, ?)",
-                TEST_ACCOUNT_NO, 100);
+                "INSERT INTO ACCOUNT (ACCOUNT_NO, BALANCE, ACCOUNT_TYPE) VALUES (?, ?, ?)",
+                TEST_ACCOUNT_NO, 100, TEST_ACCOUNT_TYPE.getTypeString());
     }
 
     @Test
